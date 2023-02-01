@@ -18,17 +18,20 @@ public class WeaponManager : MonoBehaviour
    public Weapon pistol;
    public Weapon shotgun;
    public Weapon rocketlauncher;
-   public Weapon activeweapon = null;
+   public Weapon activeweapon = new Weapon(WeaponType.None);
    public PlayerInput playerInput;
    private InputAction weapon1;
    private InputAction weapon2;
    private InputAction weapon3;
+   private InputAction fire;
 
    void Start()
    {
       weapon1 = playerInput.actions["Pistol"];
       weapon2 = playerInput.actions["Shotgun"];
       weapon3 = playerInput.actions["RocketLauncher"];
+      fire = playerInput.actions["Shoot"];
+      activeweapon = pistol;
    }
 
    // Update is called once per frame
@@ -36,17 +39,19 @@ public class WeaponManager : MonoBehaviour
    {
       if (weapon1.triggered)
       {
-         SelectWeapon(new Weapon(WeaponType.Pistol));
+         SelectWeapon(pistol);
       }
       if (weapon2.triggered)
       {
-         SelectWeapon(new Weapon(WeaponType.Shotgun));
+         SelectWeapon(shotgun);
       }
       if (weapon3.triggered)
       {
-         SelectWeapon(new Weapon(WeaponType.RocketLauncher));
+         SelectWeapon(rocketlauncher);
       }
-
+      if (fire.triggered) {
+         Fire();
+      }
    }
    public void RegisterNewWeapon(Weapon weapon)
    {
@@ -61,11 +66,15 @@ public class WeaponManager : MonoBehaviour
 
    public void SelectWeapon(Weapon weapon)
    {
-      if (currentTypes.Contains(weapon.weaponType) && weapon != activeweapon)
+      if (currentTypes.Contains(weapon.weaponType) && !weapon.Equals(activeweapon))
       {
          activeweapon?.gameObject.SetActive(false);
          activeweapon = weapon;
          activeweapon?.gameObject.SetActive(true);
       }
+   }
+
+   public void Fire() {
+      activeweapon.Fire();
    }
 }

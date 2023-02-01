@@ -8,21 +8,33 @@ public class Weapon : MonoBehaviour
    public WeaponType weaponType = WeaponType.None;
    public new string name = "Weapon";
    public Projectile projectile;
+   public GameObject projectilePrefab;
    public int currentAmmo;
    public int maxAmmo;
+   [SerializeField]
+   private Transform shootPos;
 
-    public Weapon (WeaponType _weaponType) {
+   public Weapon(WeaponType _weaponType)
+   {
       weaponType = _weaponType;
    }
 
-   void Start()
+   public bool Equals(Weapon weapon)
    {
-
+      if (this.weaponType == weapon.weaponType)
+      {
+         return true;
+      }
+      return false;
    }
 
-   // Update is called once per frame
-   void Update()
-   {
-
+   public void Fire() {
+      Debug.Log("bang");
+      if (projectile.projectileType == ProjectileType.Projectile) {
+         Instantiate(projectilePrefab, shootPos.position, shootPos.transform.rotation);
+      }
+      if (projectile.projectileType == ProjectileType.Hitscan) {
+         
+      }
    }
 }

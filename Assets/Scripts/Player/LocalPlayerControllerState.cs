@@ -284,6 +284,10 @@ public class LocalPlayerControllerState : MonoBehaviour
       playerController.Move((playerCurrentVelocity) * Time.deltaTime);
 
    }
+   
+   public void Explode(Vector3 force) {
+      playerCurrentVelocity += force;
+   }
    public void Jump()
    {
       if (canJump)

@@ -119,6 +119,7 @@ public class LocalPlayerControllerState : MonoBehaviour
          isCrouching = true;
       }
 
+      MovePlayer();
       Look();
 
    }
@@ -126,7 +127,7 @@ public class LocalPlayerControllerState : MonoBehaviour
    void FixedUpdate()
    {
       GroundCheck();
-      MovePlayer();
+      
 
    }
 
@@ -280,8 +281,12 @@ public class LocalPlayerControllerState : MonoBehaviour
          AirMove();
       }
 
-      playerController.Move((playerCurrentVelocity) * Time.fixedDeltaTime);
+      playerController.Move((playerCurrentVelocity) * Time.deltaTime);
 
+   }
+   
+   public void Explode(Vector3 force) {
+      playerCurrentVelocity += force;
    }
    public void Jump()
    {

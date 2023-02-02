@@ -100,9 +100,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectileType: 1
   projectileSpeed: 100
-  projectileDamage: 0
+  projectileDamage: 20
   canAbsorb: 0
   RocketExplosionRadius: 5
+  ignore:
+    serializedVersion: 2
+    m_Bits: 448
 --- !u!54 &5270364261507073076
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -13,6 +13,9 @@ public class Weapon : MonoBehaviour
    public int maxAmmo;
    [SerializeField]
    private Transform shootPos;
+   public int bulletsPerShot = 5;
+   public float bulletSpread = 2.0f;
+
 
    public Weapon(WeaponType _weaponType)
    {
@@ -28,13 +31,22 @@ public class Weapon : MonoBehaviour
       return false;
    }
 
-   public void Fire() {
-      Debug.Log("bang");
-      if (projectile.projectileType == ProjectileType.Projectile) {
+   public void Fire()
+   {
+      if (weaponType == WeaponType.RocketLauncher)
+      {
          Instantiate(projectilePrefab, shootPos.position, shootPos.transform.rotation);
       }
-      if (projectile.projectileType == ProjectileType.Hitscan) {
-         
+      if (weaponType == WeaponType.Pistol)
+      {
+         Instantiate(projectilePrefab, shootPos.position, shootPos.transform.rotation);
+      }
+      if (weaponType == WeaponType.Shotgun)
+      {
+         for (int i = 0; i < bulletsPerShot; i++)
+         {
+            Instantiate(projectilePrefab, shootPos.position, shootPos.transform.rotation * Quaternion.Euler(new Vector3(Random.Range(-bulletSpread, bulletSpread), Random.Range(-bulletSpread, bulletSpread), Random.Range(-bulletSpread, bulletSpread))));
+         }
       }
    }
 }

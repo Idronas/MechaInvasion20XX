@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 688346740185628337}
   - component: {fileID: 1648745057346489728}
   m_Layer: 0
-  m_Name: PistolBullet
+  m_Name: ShotgunBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectileType: 0
   projectileSpeed: 0
-  projectileDamage: 5
+  projectileDamage: 1
   canAbsorb: 0
   RocketExplosionRadius: 0
   ignore:
@@ -105,7 +105,7 @@ LineRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
+        value: 0.025862467
         inSlope: 0
         outSlope: 0
         tangentMode: 0

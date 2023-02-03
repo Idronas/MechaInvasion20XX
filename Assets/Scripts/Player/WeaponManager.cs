@@ -24,6 +24,7 @@ public class WeaponManager : MonoBehaviour
    private InputAction weapon2;
    private InputAction weapon3;
    private InputAction fire;
+   private InputAction reload;
 
    void Start()
    {
@@ -31,6 +32,7 @@ public class WeaponManager : MonoBehaviour
       weapon2 = playerInput.actions["Shotgun"];
       weapon3 = playerInput.actions["RocketLauncher"];
       fire = playerInput.actions["Shoot"];
+      reload = playerInput.actions["Reload"];
       activeweapon = pistol;
    }
 
@@ -51,6 +53,9 @@ public class WeaponManager : MonoBehaviour
       }
       if (fire.triggered) {
          Fire();
+      }
+      if (reload.triggered) {
+         Reload();
       }
    }
    public void RegisterNewWeapon(Weapon weapon)
@@ -74,7 +79,17 @@ public class WeaponManager : MonoBehaviour
       }
    }
 
+   public void Reload() {
+      activeweapon.Reload();
+   }
+
    public void Fire() {
       activeweapon.Fire();
+   }
+
+   public void ReloadAllWeapons() {
+      pistol.ReloadInstant();
+      shotgun.ReloadInstant();
+      rocketlauncher.ReloadInstant();
    }
 }

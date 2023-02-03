@@ -7,408 +7,257 @@ using UnityEngine.InputSystem;
 [System.Serializable]
 public class LocalPlayerControllerState : MonoBehaviour
 {
+   [Header("Movement")]
+   private float moveSpeed;
+   public float walkSpeed;
+   public float sprintSpeed;
 
-   #region Properties
-   public CharacterController playerController;
-   public Camera playerCamera;
+   public float groundDrag;
+
+   [Header("Jumping")]
+   public float jumpForce;
+   public float jumpCooldown;
+   public float airMultiplier;
+   bool readyToJump;
+
+   [Header("Crouching")]
+   public float crouchSpeed;
+   public float crouchYScale;
+   private float startYScale;
+
+   [Header("Keybinds")]
    public PlayerInput playerInput;
-   private Vector2 rotation = Vector2.zero;
-   private float currentGravity = -9.8f;
-   private float currentSpeed = 3;
-   private Vector3 currentMovement = Vector3.zero;
-   private bool obstacleAbove;
-   private bool sprinting = false;
-   private float timeSinceLastLand = 0;
-   float turnSmoothVelocity;
-   private bool canJump = true;
-
-   private float currentJumpTime = 0;
-   private bool jumpCoolingDown = false;
-   private float yVelocity = 0f;
-   private bool isCrouching = false;
-   private float originalHeight, originalCameraY, originalFOV;
-
-   private Vector2 moveInput;
-   private Vector2 lookInput;
-
-   private bool grounded;
-   #endregion
-
-   #region inpput stuff
-   private InputAction look;
    private InputAction move;
-   private InputAction shoot;
    private InputAction crouch;
    private InputAction sprint;
-   private InputAction interact;
    private InputAction jump;
-   #endregion
+   private float lookSensitivity;
 
-   #region Fields
-   public float lookSensitivity = 3;
-   public float playerMaxSpeed = 4.5f;
-   public float playerMaxAirSpeed = 4.5f;
-   public float playerAcceleration = 2f;
-   public float airAcceleration = 1.5f;
-   public float playerMaxCrouchSpeed = 2.5f;
-   public float playerCrouchAcceleration = 1f;
-   public float playerTerminalVelocity = -9.8f;
-   public float playerMaxSprintSpeed = 6.5f;
-   public float playerSprintAcceleration = 3f;
-   public float playerFallSpeed = 0.5f;
-   public float sprintEase = 0.25f;
-   public float FOVEase = .8f;
-   public float baseInputEase = 1f;
-   public float fallingInputEase = .25f;
-   public float turnSmoothness = .25f;
-   public bool hasGravity = true;
-   public float jumpSpeed = 3;
-   public float jumpCooldown = 0.25f;
-   public float sprintSpeed = 6;
-   public float bobSpeed, bobHeight;
-   public float sprintFOVKick = 1.5f;
-   public float explosionEase = 1f;
-   public float friction = .025f;
-   public Vector3 playerCurrentVelocity = new Vector3(0, 0, 0);
-   public Vector3 externalForce = Vector3.zero;
+   [Header("Ground Check")]
+   public float playerHeight;
+   public LayerMask whatIsGround;
+   bool grounded;
 
-   public LayerMask jumpMask;
-   #endregion
+   [Header("Slope Handling")]
+   public float maxSlopeAngle;
+   private RaycastHit slopeHit;
+   private bool exitingSlope;
 
 
+   public Transform orientation;
 
-   void Start()
+   float horizontalInput;
+   float verticalInput;
+
+   Vector3 moveDirection;
+
+   Rigidbody rb;
+
+   public MovementState state;
+   public enum MovementState
    {
-      //psm.TPSGraphic.SetActive(false);
-
-      playerController = gameObject.GetComponent<CharacterController>();
-      currentGravity = playerTerminalVelocity;
-      currentSpeed = playerMaxSpeed;
-      Cursor.visible = false;
-      Cursor.lockState = CursorLockMode.Locked;
-
-      originalHeight = playerController.height;
-
+      walking,
+      sprinting,
+      crouching,
+      air
    }
 
-   void Update()
+   private void Start()
+   {
+      rb = GetComponent<Rigidbody>();
+      rb.freezeRotation = true;
+
+      readyToJump = true;
+
+      startYScale = transform.localScale.y;
+   }
+
+   private void Update()
+   {
+      // ground check
+      grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
+
+      MyInput();
+      SpeedControl();
+      StateHandler();
+
+      // handle drag
+      if (grounded)
+         rb.drag = groundDrag;
+      else
+         rb.drag = 0;
+   }
+
+   private void FixedUpdate()
+   {
+      MovePlayer();
+   }
+
+   private void MyInput()
    {
 
       lookSensitivity = SettingsManager.lookSensitivity;
-      shoot = playerInput.actions["Shoot"];
       crouch = playerInput.actions["Crouch"];
       sprint = playerInput.actions["Sprint"];
       move = playerInput.actions["Move"];
-      look = playerInput.actions["Look"];
-      interact = playerInput.actions["Interact"];
       jump = playerInput.actions["Jump"];
 
-      UpdateMoveInput(move.ReadValue<Vector2>());
-      UpdateLookInput(look.ReadValue<Vector2>());
+      horizontalInput = move.ReadValue<Vector2>().x;
+      verticalInput = move.ReadValue<Vector2>().y;
 
-      if (jump.IsPressed()) {
-         Jump();
-      }
-      if (sprint.triggered) {
-         sprinting = true;
-      }
-      if (!crouch.IsPressed()) {
-         isCrouching = false;
-      }
-      else {
-         isCrouching = true;
-      }
-
-      MovePlayer();
-      Look();
-
-   }
-
-   void FixedUpdate()
-   {
-      GroundCheck();
-      
-
-   }
-
-   #region Input Methods
-
-   public void UpdateMoveInput(Vector2 _move)
-   {
-      moveInput = _move;
-   }
-
-   public void UpdateLookInput(Vector2 _move)
-   {
-      lookInput = _move;
-   }
-   public Vector2 GetLookInput()
-   {
-      return lookInput;
-   }
-
-
-
-   #endregion
-
-
-   #region Movement Methods
-   private void Look()
-   {
-
-      rotation.y += lookInput.x * lookSensitivity * Time.deltaTime;
-      rotation.x += lookInput.y * lookSensitivity * Time.deltaTime;
-      rotation.x = Mathf.Clamp(rotation.x, -90f, 90f);
-      gameObject.transform.eulerAngles = new Vector2(0, rotation.y);
-      playerCamera.transform.localRotation = Quaternion.Euler(-rotation.x, 0f, 0f);
-
-      //psm.UpdateAimRot(psm.vCam.transform.localRotation);
-      //psm.UpdateFlashRot(psm.vCam.transform.localRotation);
-
-      //psm.anim.SetFloat("MovX", lookInput.x * 3);
-   }
-
-   void Gravity()
-   {
-      playerCurrentVelocity.y += playerTerminalVelocity * Time.deltaTime;
-      //playerCurrentVelocity.y = Mathf.Clamp(yVelocity.y, playerGravity, 2000f);
-      if (grounded) playerCurrentVelocity.y = Mathf.Max(playerCurrentVelocity.y, 0);
-   }
-
-   private void GroundMove()
-   {
-      float deltaX;
-      float deltaZ;
-
-      float maxSpeedThisFrame = playerMaxSpeed;
-      float accelerationThisFrame = playerAcceleration;
-      Crouch();
-      Sprint();
-
-      if (sprinting) {
-         maxSpeedThisFrame = playerMaxSprintSpeed;
-         accelerationThisFrame = playerSprintAcceleration;
-      }
-      if (isCrouching) {
-         maxSpeedThisFrame = playerMaxCrouchSpeed;
-         accelerationThisFrame = playerCrouchAcceleration;
-      }
-
-      if (moveInput.x == 0 && moveInput.y == 0 && playerCurrentVelocity.x == 0 && playerCurrentVelocity.z == 0) return;
-
-
-
-      // gives directions relative to where the player is facing
-      Vector3 direction = (new Vector3(moveInput.x, moveInput.y));
-      Vector3 move = (direction.x * gameObject.transform.right + direction.y * gameObject.transform.forward).normalized;
-      playerCurrentVelocity += move * accelerationThisFrame;
-      //frictino this time i swear
-      Vector2 playerCurrentVelocityAsV2 = new Vector2(playerCurrentVelocity.x, playerCurrentVelocity.z);
-      //need to represent the players velocity as a vector2 here so it doesn't touch vertical momentum
-      playerCurrentVelocityAsV2 = Vector2.MoveTowards(playerCurrentVelocityAsV2, Vector2.zero, friction);
-      if (Mathf.Abs(playerCurrentVelocityAsV2.magnitude) > playerMaxSpeed)
+      // when to jump
+      if (jump.triggered && readyToJump && grounded)
       {
-         playerCurrentVelocityAsV2 = playerCurrentVelocityAsV2.normalized * maxSpeedThisFrame;
+         readyToJump = false;
+
+         Jump();
+
+         Invoke(nameof(ResetJump), jumpCooldown);
       }
-      deltaX = playerCurrentVelocityAsV2.x - playerCurrentVelocity.x;
-      deltaZ = playerCurrentVelocityAsV2.y - playerCurrentVelocity.z;
 
-      playerCurrentVelocity.x += deltaX;
-      playerCurrentVelocity.z += deltaZ;
-      //animator stuff and other boring nonsense
-      //psm.fpsAnim.SetFloat("Speed", direction.magnitude);
-      //psm.anim.SetFloat("MovX", move.magnitude);
+      // start crouch
+      if (crouch.triggered)
+      {
+         transform.localScale = new Vector3(transform.localScale.x, crouchYScale, transform.localScale.z);
+         rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
+      }
 
-
+      // stop crouch
+      if (!crouch.WasReleasedThisFrame())
+      {
+         transform.localScale = new Vector3(transform.localScale.x, startYScale, transform.localScale.z);
+      }
    }
-   private void AirMove()
+
+   private void StateHandler()
    {
-      float deltaX;
-      float deltaZ;
+      // Mode - Crouching
+      if (crouch.IsPressed())
+      {
+         state = MovementState.crouching;
+         moveSpeed = crouchSpeed;
+      }
 
-      
-      float accelerationThisFrame = airAcceleration;
-      Crouch();
-      Sprint();
+      // Mode - Sprinting
+      else if (grounded && sprint.IsPressed())
+      {
+         state = MovementState.sprinting;
+         moveSpeed = sprintSpeed;
+      }
 
-      // if (sprinting) {
-      //    accelerationThisFrame = playerSprintAcceleration * airAcceleration;
-      // }
-      // if (isCrouching) {
-      //    accelerationThisFrame = playerCrouchAcceleration * airAcceleration;
-      // }
+      // Mode - Walking
+      else if (grounded)
+      {
+         state = MovementState.walking;
+         moveSpeed = walkSpeed;
+      }
 
-      //if (moveInput.x == 0 && moveInput.y == 0 && playerCurrentVelocity.x == 0 && playerCurrentVelocity.z == 0) return;
-
-
-
-      // gives directions relative to where the player is facing
-      Vector3 direction = (new Vector3(moveInput.x, moveInput.y));
-      Vector3 move = (direction.x * gameObject.transform.right + direction.y * gameObject.transform.forward).normalized;
-      playerCurrentVelocity += move * accelerationThisFrame;
-      //frictino this time i swear
-      Vector2 playerCurrentVelocityAsV2 = new(playerCurrentVelocity.x, playerCurrentVelocity.z);
-      //need to represent the players velocity as a vector2 here so it doesn't touch vertical momentum
-      if (playerCurrentVelocityAsV2.x > playerMaxAirSpeed) playerCurrentVelocityAsV2.x = playerMaxAirSpeed;
-      if (playerCurrentVelocityAsV2.x < -playerMaxAirSpeed) playerCurrentVelocityAsV2.x = -playerMaxAirSpeed;
-      if (playerCurrentVelocityAsV2.y > playerMaxAirSpeed) playerCurrentVelocityAsV2.y = playerMaxAirSpeed;
-      if (playerCurrentVelocityAsV2.y < -playerMaxAirSpeed) playerCurrentVelocityAsV2.y = -playerMaxAirSpeed;
-
-      deltaX = playerCurrentVelocityAsV2.x - playerCurrentVelocity.x;
-      deltaZ = playerCurrentVelocityAsV2.y - playerCurrentVelocity.z;
-      
-      playerCurrentVelocity.x += deltaX;
-      playerCurrentVelocity.z += deltaZ;
-      //animator stuff and other boring nonsense
-      //psm.fpsAnim.SetFloat("Speed", direction.magnitude);
-      //psm.anim.SetFloat("MovX", move.magnitude);
-
-
+      // Mode - Air
+      else
+      {
+         state = MovementState.air;
+      }
    }
+
    private void MovePlayer()
    {
+      // calculate movement direction
+      moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
-      if (hasGravity)
+      // on slope
+      if (OnSlope() && !exitingSlope)
       {
-         Gravity();
-      }
-      if (grounded)
-      {
-         GroundMove();
-      }
-      if (!grounded)
-      {
-         AirMove();
+         rb.AddForce(GetSlopeMoveDirection() * moveSpeed * 20f, ForceMode.Force);
+
+         if (rb.velocity.y > 0)
+            rb.AddForce(Vector3.down * 80f, ForceMode.Force);
       }
 
-      playerController.Move((playerCurrentVelocity) * Time.deltaTime);
+      // on ground
+      else if (grounded)
+         rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
 
+      // in air
+      else if (!grounded)
+         rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
+
+      // turn gravity off while on slope
+      rb.useGravity = !OnSlope();
    }
-   
-   public void Explode(Vector3 force) {
-      playerCurrentVelocity += force;
-   }
-   public void Jump()
+
+   private void SpeedControl()
    {
-      if (canJump)
+      // limiting speed on slope
+      if (OnSlope() && !exitingSlope)
       {
-         playerCurrentVelocity.y = Mathf.Sqrt((jumpSpeed) * -3.0f * playerTerminalVelocity);
-
+         if (rb.velocity.magnitude > moveSpeed)
+            rb.velocity = rb.velocity.normalized * moveSpeed;
       }
 
-   }
-
-   public void SprintInput()
-   {
-      if (!isCrouching && moveInput.y > .1f)
-      {
-         sprinting = true;
-      }
-   }
-
-   void OnDrawGizmos() {
-      float radius = playerController.radius * 0.9f;
-      Vector3 pos = playerController.transform.position - (new Vector3(0 ,(playerController.height - playerController.height / 1.5f), 0));
-      Gizmos.color = Color.red;
-      Gizmos.DrawSphere(pos, radius);
-   }
-
-   private void GroundCheck()
-   {
-      float radius = playerController.radius * 0.9f;
-      Vector3 pos = playerController.transform.position - (new Vector3(0 ,(playerController.height - playerController.height / 1.5f), 0));
-
-
-
-      if (Physics.CheckSphere(pos, radius, ~jumpMask))
-      {
-         grounded = true;
-         canJump = true;
-      }
+      // limiting speed on ground or in air
       else
       {
-         grounded = false;
-         canJump = false;
-      }
-   }
-   private void Sprint()
-   {
-      if (sprinting && moveInput.y < .1f)
-      {
-         sprinting = false;
-      }
+         Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
-      if (sprinting && !isCrouching)
-      {
-         currentSpeed = Mathf.Lerp(currentSpeed, sprintSpeed, sprintEase);
-         //playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, sprintFOVKick, FOVEase - .1f);
-
-         if (grounded)
+         // limit velocity if needed
+         if (flatVel.magnitude > moveSpeed)
          {
-            playerCamera.transform.localPosition = new Vector3(0.0f, Mathf.Sin(Time.time * bobSpeed) * bobHeight + originalCameraY, 0.0f);
-         }
-      }
-      else
-      {
-         currentSpeed = Mathf.Lerp(currentSpeed, playerMaxSpeed, sprintEase);
-         //playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, originalFOV, FOVEase);
-
-         if (!isCrouching)
-         {
-            playerCamera.transform.localPosition = new Vector3(0, originalCameraY, 0);
+            Vector3 limitedVel = flatVel.normalized * moveSpeed;
+            rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
          }
       }
    }
 
-   public void CrouchInput(bool _bool)
+   private void Jump()
    {
-      isCrouching = _bool;
+      exitingSlope = true;
+
+      // reset y velocity
+      rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+
+      rb.AddForce(transform.up * jumpForce, ForceMode.VelocityChange);
+   }
+   private void ResetJump()
+   {
+      readyToJump = true;
+
+      exitingSlope = false;
    }
 
-
-   private void Crouch()
+   private bool OnSlope()
    {
-      if (isCrouching)
+      if (Physics.Raycast(transform.position, Vector3.down, out slopeHit, playerHeight * 0.5f + 0.3f))
       {
-
+         float angle = Vector3.Angle(Vector3.up, slopeHit.normal);
+         return angle < maxSlopeAngle && angle != 0;
       }
 
-      if (isCrouching && !sprinting)
-      {
-         playerController.height = (originalHeight / 2) + .50f;
-         // playerController.center = new Vector3(0, .6f, 0);
-         playerCamera.transform.localPosition = Vector3.Lerp(playerCamera.transform.localPosition, new Vector3(playerCamera.transform.localPosition.x, (playerCamera.transform.localPosition.y / 2) - .25f, playerCamera.transform.localPosition.z), .25f);
-      }
-      else
-      {
-         playerController.height = originalHeight;
-         //playerController.center = new Vector3(0, 1, 0);
-         playerCamera.transform.localPosition = Vector3.Lerp(playerCamera.transform.localPosition, new Vector3(playerCamera.transform.localPosition.x, originalCameraY, playerCamera.transform.localPosition.z), .25f);
-      }
-
-
-      //anim.SetBool("Crouch", isCrouching);
-
-      int layerMask = 1 << 9;
-      layerMask = ~layerMask;
-
-      RaycastHit hit;
-      if ((Physics.Raycast(gameObject.transform.position, gameObject.transform.TransformDirection(Vector3.up), out hit, originalHeight, layerMask)))
-      {
-         //Debug.Log("hit");
-         obstacleAbove = true;
-      }
-      else
-      {
-         obstacleAbove = false;
-         //isCrouching = false;
-      }
-
-
+      return false;
    }
 
+   private Vector3 GetSlopeMoveDirection()
+   {
+      return Vector3.ProjectOnPlane(moveDirection, slopeHit.normal).normalized;
+   }
+
+   public void Explode(Vector3 force)
+   {
+      rb.AddForce(force, ForceMode.Impulse);
+   }
+
+   #region State Management
+   public void Die()
+   {
+      Respawn();
+   }
+   public void Respawn()
+   {
+      GameObject spawnPoint = GameObject.Find("RespawnPoint");
+      gameObject.transform.position = spawnPoint.transform.position;
+      GetComponent<PlayerTraits>().health = GetComponent<PlayerTraits>().maxHealth;
+      GetComponentInChildren<WeaponManager>().ReloadAllWeapons();
+   }
    #endregion
-
 }
 
 

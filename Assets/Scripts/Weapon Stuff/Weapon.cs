@@ -26,6 +26,7 @@ public class Weapon : MonoBehaviour
     public float bulletSpread = 2.0f;
     public Action onWeaponSelect;
     public string animPullUpName;
+    public UnityEvent onWeaponFire;
 
     [HideInInspector]
     public WeaponManager weaponMan;
@@ -95,6 +96,7 @@ public class Weapon : MonoBehaviour
         fireWait = 0;
         currentAmmo--;
         weaponMan?.anim?.SetTrigger("Fire");
+        onWeaponFire?.Invoke();
     }
 
     public void WeaponSelected()

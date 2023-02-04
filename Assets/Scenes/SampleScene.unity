@@ -1526,6 +1526,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Spawner
       objectReference: {fileID: 0}
+    - target: {fileID: 720250766194613409, guid: d9ac5585a08ec014795a793ccc1cd5b7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d9ac5585a08ec014795a793ccc1cd5b7, type: 3}
 --- !u!1001 &2291491131566924590
@@ -1673,6 +1678,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 506353421423981641, guid: 1e7fdc559c5f1954aadedf53cba545b5,
+        type: 3}
+      propertyPath: airAcceleration
+      value: 0.05
+      objectReference: {fileID: 0}
     - target: {fileID: 1223882915993299383, guid: 1e7fdc559c5f1954aadedf53cba545b5,
         type: 3}
       propertyPath: m_Layer

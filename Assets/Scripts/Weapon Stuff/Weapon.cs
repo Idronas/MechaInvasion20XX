@@ -31,7 +31,7 @@ public class Weapon : MonoBehaviour
     [HideInInspector]
     public WeaponManager weaponMan;
 
-    private void Start()
+    private void Awake()
     {
         onWeaponSelect += WeaponSelected;
     }

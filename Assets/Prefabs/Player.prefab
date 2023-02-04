@@ -188,7 +188,7 @@ MonoBehaviour:
   jumpCooldown: 0.25
   sprintSpeed: 6
   bobSpeed: 1
-  bobHeight: 1
+  bobHeight: 0.01
   sprintFOVKick: 1.5
   explosionEase: 1
   friction: 0.1

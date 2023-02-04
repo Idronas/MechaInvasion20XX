@@ -41,6 +41,7 @@ public class WeaponManager : MonoBehaviour
         rocketlauncher.weaponMan = this;
 
         SelectWeapon(pistol);
+        activeweapon.WeaponSelected();
     }
 
     // Update is called once per frame

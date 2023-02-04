@@ -10,6 +10,7 @@ public class GenericEnemyController : MonoBehaviour
     public GameObject weapon;
     public Weapon enemyWeapon;
     public Animator anim;
+    public GameObject gibs;
 
 
     public float distanceToTarget;
@@ -63,6 +64,8 @@ public class GenericEnemyController : MonoBehaviour
 
     public void Die()
     {
+        var c = GameObject.Instantiate(gibs, this.transform.position, this.transform.rotation);
+        Destroy(c, 10f);
         Destroy(gameObject);
     }
 }

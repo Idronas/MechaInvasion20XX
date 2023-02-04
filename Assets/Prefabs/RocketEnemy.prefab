@@ -315,8 +315,9 @@ MonoBehaviour:
   weapon: {fileID: 8440557828563386364}
   enemyWeapon: {fileID: 8440557828563384323}
   anim: {fileID: 5552762185766746203}
+  gibs: {fileID: 4024347683856632289, guid: c4ca1da0245ce0b4e9c03615f96fb971, type: 3}
   distanceToTarget: 0
-  followDistance: 3
+  followDistance: 10
   lookSpeed: 5
   waitTime: 1
 --- !u!114 &8440557830333203731

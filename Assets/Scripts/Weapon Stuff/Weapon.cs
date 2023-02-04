@@ -76,8 +76,12 @@ public class Weapon : MonoBehaviour
 
     public void Fire()
     {
-        if (fireWait <= fireDelay) return;
-        if (currentAmmo <= 0) return;
+        if (fireWait <= fireDelay || reloading) return;
+        if (currentAmmo <= 0)
+        {
+            Reload();
+            return;
+        }
         if (weaponType == WeaponType.RocketLauncher)
         {
             Instantiate(projectilePrefab, shootPos.position, shootPos.transform.rotation);

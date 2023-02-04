@@ -16,8 +16,8 @@ public class GenericEnemyController : MonoBehaviour
    private float fireWait = 1f;
    void Start()
    {
-
-   }
+		Target = GameObject.Find("Player");
+	}
 
    // Update is called once per frame
    void Update()

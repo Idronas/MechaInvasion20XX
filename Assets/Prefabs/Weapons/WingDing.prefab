@@ -27,11 +27,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1094056202543702742}
   m_LocalRotation: {x: -0.070441104, y: -0.5783439, z: -0.16687916, w: 0.7954292}
-  m_LocalPosition: {x: 0.36937752, y: 0.7153815, z: -0.029956177}
+  m_LocalPosition: {x: 0.288, y: 0.496, z: -0.049}
   m_LocalScale: {x: 0.16890563, y: 0.16890559, z: 0.16890551}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2548611588189377100}
+  - {fileID: 6338269262887625662}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -112,6 +113,9 @@ MonoBehaviour:
   bulletsPerShot: 0
   bulletSpread: 0
   animPullUpName: PistolPullupBaked
+  onWeaponFire:
+    m_PersistentCalls:
+      m_Calls: []
   weaponMan: {fileID: 0}
 --- !u!1 &7460446392209904561
 GameObject:
@@ -137,10 +141,85 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7460446392209904561}
   m_LocalRotation: {x: 0.7071073, y: -0.00000020861619, z: 0.00000026077024, w: -0.70710635}
-  m_LocalPosition: {x: -0.8, y: 3.84, z: -0.74}
+  m_LocalPosition: {x: -0.01, y: 4.24, z: -0.33}
   m_LocalScale: {x: 5.933893, y: 5.9338965, z: 5.933892}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8500902938620233245}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &5799711825650828373
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 8500902938620233245}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: c65edaceee612774aae051730559b4c7,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c65edaceee612774aae051730559b4c7,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c65edaceee612774aae051730559b4c7,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.62
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c65edaceee612774aae051730559b4c7,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.03
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c65edaceee612774aae051730559b4c7,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7191277
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c65edaceee612774aae051730559b4c7,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.6948779
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c65edaceee612774aae051730559b4c7,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.000000029802326
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c65edaceee612774aae051730559b4c7,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.00000006332994
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c65edaceee612774aae051730559b4c7,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -88.035
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c65edaceee612774aae051730559b4c7,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c65edaceee612774aae051730559b4c7,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c65edaceee612774aae051730559b4c7,
+        type: 3}
+      propertyPath: m_Name
+      value: TheREALDismantler
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c65edaceee612774aae051730559b4c7, type: 3}
+--- !u!4 &6338269262887625662 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c65edaceee612774aae051730559b4c7,
+    type: 3}
+  m_PrefabInstance: {fileID: 5799711825650828373}
+  m_PrefabAsset: {fileID: 0}

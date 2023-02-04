@@ -56,8 +56,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 596424526105427146, guid: 29e849f453c2a2244886f4929d40075e, type: 3}
-  - {fileID: 5330521286013128893, guid: 29e849f453c2a2244886f4929d40075e, type: 3}
+  - {fileID: 2100000, guid: c9a417b021b4d8a4b81418f71917cd69, type: 2}
+  - {fileID: 2100000, guid: 622dd691399f3724ab4e3a5808b37a99, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -190,8 +190,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 920928302809579675, guid: 63cacb9493548134bb4d4ba28b2c5797,
         type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 920928302809579675, guid: 63cacb9493548134bb4d4ba28b2c5797,
+        type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 920928302985094561, guid: 63cacb9493548134bb4d4ba28b2c5797,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 920928302985094574, guid: 63cacb9493548134bb4d4ba28b2c5797,
         type: 3}
@@ -283,6 +293,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: fd3bd2935036e3443889be4eeadfd686, type: 2}
+    - target: {fileID: 920928303318789964, guid: 63cacb9493548134bb4d4ba28b2c5797,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 920928303745250451, guid: 63cacb9493548134bb4d4ba28b2c5797,
         type: 3}
       propertyPath: scalingMode
@@ -297,6 +312,11 @@ PrefabInstance:
         type: 3}
       propertyPath: InitialModule.startColor.maxColor.g
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 920928303745250454, guid: 63cacb9493548134bb4d4ba28b2c5797,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 920928303745250454, guid: 63cacb9493548134bb4d4ba28b2c5797,
         type: 3}
@@ -343,6 +363,11 @@ PrefabInstance:
       propertyPath: ColorModule.gradient.maxGradient.key1.r
       value: 0.39215684
       objectReference: {fileID: 0}
+    - target: {fileID: 920928303761464964, guid: 63cacb9493548134bb4d4ba28b2c5797,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 920928303934413476, guid: 63cacb9493548134bb4d4ba28b2c5797,
         type: 3}
       propertyPath: scalingMode
@@ -377,6 +402,11 @@ PrefabInstance:
         type: 3}
       propertyPath: ColorModule.gradient.maxGradient.key1.r
       value: 0.39215684
+      objectReference: {fileID: 0}
+    - target: {fileID: 920928303934413479, guid: 63cacb9493548134bb4d4ba28b2c5797,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 920928304222974449, guid: 63cacb9493548134bb4d4ba28b2c5797,
         type: 3}
@@ -458,6 +488,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FX_PF_Example__FlameAround
       objectReference: {fileID: 0}
+    - target: {fileID: 920928304222974452, guid: 63cacb9493548134bb4d4ba28b2c5797,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 920928304251137221, guid: 63cacb9493548134bb4d4ba28b2c5797,
         type: 3}
       propertyPath: scalingMode
@@ -477,6 +512,11 @@ PrefabInstance:
         type: 3}
       propertyPath: InitialModule.startColor.maxColor.r
       value: 0.0073931217
+      objectReference: {fileID: 0}
+    - target: {fileID: 920928304251137240, guid: 63cacb9493548134bb4d4ba28b2c5797,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 920928304251137240, guid: 63cacb9493548134bb4d4ba28b2c5797,
         type: 3}
@@ -502,6 +542,11 @@ PrefabInstance:
         type: 3}
       propertyPath: InitialModule.startColor.maxColor.r
       value: 0.018140236
+      objectReference: {fileID: 0}
+    - target: {fileID: 920928304400727639, guid: 63cacb9493548134bb4d4ba28b2c5797,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 920928304427726293, guid: 63cacb9493548134bb4d4ba28b2c5797,
         type: 3}
@@ -553,6 +598,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 97e5c404dd76d554abb1ae487d3dbb74, type: 2}
+    - target: {fileID: 920928304427726312, guid: 63cacb9493548134bb4d4ba28b2c5797,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 920928304887177623, guid: 63cacb9493548134bb4d4ba28b2c5797,
         type: 3}
       propertyPath: scalingMode
@@ -567,6 +617,11 @@ PrefabInstance:
         type: 3}
       propertyPath: InitialModule.startColor.maxColor.g
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 920928304887177642, guid: 63cacb9493548134bb4d4ba28b2c5797,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 920928304887177642, guid: 63cacb9493548134bb4d4ba28b2c5797,
         type: 3}
@@ -592,6 +647,16 @@ PrefabInstance:
         type: 3}
       propertyPath: InitialModule.startColor.maxColor.r
       value: 0.112263076
+      objectReference: {fileID: 0}
+    - target: {fileID: 920928304924971069, guid: 63cacb9493548134bb4d4ba28b2c5797,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3210977902096393506, guid: 63cacb9493548134bb4d4ba28b2c5797,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4111461955785881735, guid: 63cacb9493548134bb4d4ba28b2c5797,
         type: 3}

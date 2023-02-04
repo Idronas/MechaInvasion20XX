@@ -53,7 +53,8 @@ MonoBehaviour:
   ignore:
     serializedVersion: 2
     m_Bits: 0
-  maxShootDistance: 1000
+  explosionPrefab: {fileID: 6405612293563357409, guid: 85ce144db64050e4ea72f71e5535b09b,
+    type: 3}
 --- !u!120 &1648745057346489728
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -74,7 +75,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 38f2d7543f239604ca90eaf745a64fa7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -106,13 +107,22 @@ LineRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
+        value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.17956205
+        value: 0.15218534
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4

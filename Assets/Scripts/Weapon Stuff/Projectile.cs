@@ -58,10 +58,17 @@ public class Projectile : MonoBehaviour
             positions[1] = transform.position + transform.forward * 10;
             hitScanLine.SetPositions(positions);
             Destroy(gameObject, .1f);
-            Physics.Raycast(transform.position, transform.forward, out RaycastHit hit);
-            Debug.DrawRay(transform.position, transform.forward, Color.red, 3f);
-            hit.transform?.gameObject.GetComponent<EnemyTraits>()?.TakeDamage((int)projectileDamage);
-            hit.transform?.gameObject.GetComponent<PlayerTraits>()?.TakeDamage((int)projectileDamage);
+            if(Physics.Raycast(transform.position, transform.forward, out RaycastHit hit))
+            {
+                Debug.DrawRay(transform.position, transform.forward, Color.red, 3f);
+                hit.transform?.gameObject.GetComponent<EnemyTraits>()?.TakeDamage((int)projectileDamage);
+                hit.transform?.gameObject.GetComponent<PlayerTraits>()?.TakeDamage((int)projectileDamage);
+                var c = GameObject.Instantiate(explosionPrefab, hit.point, Quaternion.identity);
+                Destroy(c, .5f);
+            }
+           
+
+
         }
     }
     void OnDrawGizmos()

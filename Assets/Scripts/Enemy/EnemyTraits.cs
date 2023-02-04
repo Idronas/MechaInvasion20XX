@@ -1,24 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class EnemyTraits : MonoBehaviour
 {
-   public int health;
-	private GenericEnemyController controller;
-   void Start()
-   {
-      controller = GetComponent<GenericEnemyController>();
-   }	
+    public int health;
+    private GenericEnemyController controller;
+    public UnityEvent onTakeDamage;
 
-   // Update is called once per frame
-   void Update()
-   {
+    void Start()
+    {
+        controller = GetComponent<GenericEnemyController>();
+    }
 
-   }
+    // Update is called once per frame
+    void Update()
+    {
 
-	public void TakeDamage(int amount) {
-      health -= amount;
-		if (health <= 0) controller.Die();
-   }
+    }
+
+    public void TakeDamage(int amount)
+    {
+        health -= amount;
+        if (health <= 0) controller.Die();
+
+        onTakeDamage?.Invoke();
+    }
 }

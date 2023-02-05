@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectileType: 0
   projectileSpeed: 0
-  projectileDamage: 5
+  projectileDamage: 10
   canAbsorb: 0
   RocketExplosionRadius: 0
   ignore:

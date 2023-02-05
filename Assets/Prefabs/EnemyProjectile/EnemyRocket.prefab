@@ -103,9 +103,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectileType: 1
   projectileSpeed: 500
-  projectileDamage: 20
+  projectileDamage: 5
   canAbsorb: 0
-  RocketExplosionRadius: 5
+  RocketExplosionRadius: 2
   ignore:
     serializedVersion: 2
     m_Bits: 768

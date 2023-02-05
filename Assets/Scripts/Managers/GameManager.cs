@@ -9,7 +9,7 @@ public static class GameManager
 	public static bool isPaused = false;
 
 	public static void ReturnToMainMenu() {
-		SceneManager.LoadScene(1, LoadSceneMode.Single);
+		SceneManager.LoadScene(0, LoadSceneMode.Single);
 	}
 	public static void NextLevel() {
 		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1, LoadSceneMode.Single);

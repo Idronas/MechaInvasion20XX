@@ -44,7 +44,7 @@ public class MainMenuManager : MonoBehaviour
 
 	public void PlayGame() {
 		if (SettingsManager.DebugMode) {
-			SceneManager.LoadScene(0);
+			SceneManager.LoadScene(1);
 			return;
 		}
 		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1, LoadSceneMode.Single);

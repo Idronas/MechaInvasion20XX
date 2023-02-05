@@ -98,7 +98,7 @@ public class Weapon : MonoBehaviour
             {
                 Instantiate(projectilePrefab, shootPos.position, shootPos.transform.rotation * Quaternion.Euler(new Vector3(UnityEngine.Random.Range(-bulletSpread, bulletSpread), UnityEngine.Random.Range(-bulletSpread, bulletSpread), UnityEngine.Random.Range(-bulletSpread, bulletSpread))));
             }
-        }
+		}
         fireWait = 0;
         currentAmmo--;
         weaponMan?.anim?.SetTrigger("Fire");

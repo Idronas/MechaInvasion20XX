@@ -1368,8 +1368,14 @@ MonoBehaviour:
   shootPos: {fileID: 3380499761400686757}
   bulletsPerShot: 0
   bulletSpread: 0
+  weaponSelectEvent:
+    m_PersistentCalls:
+      m_Calls: []
   animPullUpName: 
   onWeaponFire:
+    m_PersistentCalls:
+      m_Calls: []
+  onWeaponReload:
     m_PersistentCalls:
       m_Calls: []
   weaponMan: {fileID: 0}
@@ -1436,8 +1442,14 @@ MonoBehaviour:
   shootPos: {fileID: 3380499760388470707}
   bulletsPerShot: 5
   bulletSpread: 10
+  weaponSelectEvent:
+    m_PersistentCalls:
+      m_Calls: []
   animPullUpName: 
   onWeaponFire:
+    m_PersistentCalls:
+      m_Calls: []
+  onWeaponReload:
     m_PersistentCalls:
       m_Calls: []
   weaponMan: {fileID: 0}
@@ -1503,8 +1515,14 @@ MonoBehaviour:
   shootPos: {fileID: 3380499761745601891}
   bulletsPerShot: 0
   bulletSpread: 0
+  weaponSelectEvent:
+    m_PersistentCalls:
+      m_Calls: []
   animPullUpName: 
   onWeaponFire:
+    m_PersistentCalls:
+      m_Calls: []
+  onWeaponReload:
     m_PersistentCalls:
       m_Calls: []
   weaponMan: {fileID: 0}
@@ -4908,6 +4926,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1962205721163002077}
     m_Modifications:
+    - target: {fileID: 1333900615215907455, guid: c9d883b8ba56cce498193802d0af9be3,
+        type: 3}
+      propertyPath: weaponMan
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5822492141540190342, guid: c9d883b8ba56cce498193802d0af9be3,
         type: 3}
       propertyPath: m_Name

@@ -6,9 +6,10 @@ using UnityEngine.SceneManagement;
 public static class GameManager
 {
 	static List<GameObject> enemiesThisLevel;
+	public static bool isPaused = false;
 
 	public static void ReturnToMainMenu() {
-		SceneManager.LoadScene(1);
+		SceneManager.LoadScene(1, LoadSceneMode.Single);
 	}
 	public static void NextLevel() {
 		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1, LoadSceneMode.Single);

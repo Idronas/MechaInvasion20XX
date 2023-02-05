@@ -9,6 +9,7 @@ public class PauseMenuManager : MonoBehaviour
 {
 	public Canvas[] canvases;
 	public Canvas Pause;
+	public Canvas HUD;
 	public AudioSource sfxAudioSource;
 	public AudioMixer audioMixer;
 	public AudioClip hover;
@@ -16,29 +17,29 @@ public class PauseMenuManager : MonoBehaviour
 	GameObject player;
 	public PlayerInput playerInput;
 	private InputAction pause;
-	bool isPaused = false;
+	
 
 	void Start()
 	{
-		
+		GameManager.isPaused = false;
 		canvases = GetComponentsInChildren<Canvas>();
 		foreach (Canvas c in canvases)
 		{
-			if (c.gameObject.name != "InGameUI") c.gameObject.SetActive(false);
+			if (c.gameObject.name != "HUD") c.gameObject.SetActive(false);
 		}
-		
 		player = GameObject.Find("Player");
 		playerInput = player.GetComponent<PlayerInput>();
 		pause = playerInput.actions["Pause"];
 
 	}
 
-	void Update() {
-		if (pause.triggered) {
-			ChangePanel(Pause);
-			PauseGame();
-			Cursor.visible = true;
-			Cursor.lockState = CursorLockMode.None;
+	void Update()
+	{
+		if (pause.triggered)
+		{
+			if (!GameManager.isPaused) { PauseGame(); return; }
+
+			if (GameManager.isPaused) { UnPauseGame(); return; }
 
 		}
 	}
@@ -72,8 +73,32 @@ public class PauseMenuManager : MonoBehaviour
 		audioMixer.SetFloat("MusicVolume", Mathf.Log(s.value) * 20);
 	}
 
-	public void PauseGame() {
-		isPaused = !isPaused;
+	public void PauseGame()
+	{
+		GameManager.isPaused = !GameManager.isPaused;
+		ChangePanel(Pause);
+		Cursor.visible = true;
+		Cursor.lockState = CursorLockMode.None;
+		Time.timeScale = 0;
+	}
+
+	public void UnPauseGame()
+	{
+		GameManager.isPaused = !GameManager.isPaused;
+		ChangePanel(HUD);
+		Cursor.visible = false;
+		Cursor.lockState = CursorLockMode.Locked;
+		Time.timeScale = 1f;
+	}
+
+	public void ReturnToMainMenu() {
+		Time.timeScale = 1f;
+		GameManager.ReturnToMainMenu();
+	}
+	
+	public void HoverButton()
+	{
+		sfxAudioSource.PlayOneShot(hover);
 	}
 
 }

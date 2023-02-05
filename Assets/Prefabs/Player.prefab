@@ -171,7 +171,7 @@ MonoBehaviour:
   playerMaxSpeed: 6
   playerMaxAirSpeed: 6
   playerAcceleration: 2
-  airAcceleration: 1
+  airAcceleration: 0.05
   playerMaxCrouchSpeed: 3
   playerCrouchAcceleration: 1
   playerTerminalVelocity: -9.8
@@ -302,6 +302,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4293954610577591022}
     m_Modifications:
+    - target: {fileID: 687567352298333680, guid: 5007a5dd2b985a24bbcad933536bbf22,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1191787669196211833, guid: 5007a5dd2b985a24bbcad933536bbf22,
         type: 3}
       propertyPath: player
@@ -312,6 +317,11 @@ PrefabInstance:
       propertyPath: playerInput
       value: 
       objectReference: {fileID: 5377182940520604513}
+    - target: {fileID: 3380499760592369427, guid: 5007a5dd2b985a24bbcad933536bbf22,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3380499761838183568, guid: 5007a5dd2b985a24bbcad933536bbf22,
         type: 3}
       propertyPath: m_RootOrder
@@ -371,6 +381,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Main Camera
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508613030229741878, guid: 5007a5dd2b985a24bbcad933536bbf22,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.11
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508613030229741878, guid: 5007a5dd2b985a24bbcad933536bbf22,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.11
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508613030229741878, guid: 5007a5dd2b985a24bbcad933536bbf22,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -4.69
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5007a5dd2b985a24bbcad933536bbf22, type: 3}

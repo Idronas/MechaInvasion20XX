@@ -324,9 +324,6 @@ public class LocalPlayerControllerState : MonoBehaviour
 	{
 		float radius = playerController.radius * 0.9f;
 		Vector3 pos = playerController.transform.position - (new Vector3(0, (playerController.height - playerController.height / 1.5f), 0));
-
-
-
 		if (Physics.CheckSphere(pos, radius, ~jumpMask))
 		{
 			grounded = true;
@@ -336,6 +333,9 @@ public class LocalPlayerControllerState : MonoBehaviour
 		{
 			grounded = false;
 			canJump = false;
+		}
+		if (Physics.CheckSphere(pos, radius, ~(1 << 11)) ) {
+			Debug.Log("its works");
 		}
 	}
 	private void Sprint()

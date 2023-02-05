@@ -148,6 +148,7 @@ MonoBehaviour:
   eyes: {fileID: 0}
   distanceToTarget: 0
   followDistance: 15
+  fireDistance: 30
   lookSpeed: 1.5
   waitTime: 0.95
   aggroed: 0
@@ -191,15 +192,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 739fd32f0dfbd834ebbb5583b4802dfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 25.73
-  angle: 108
+  radius: 82.07
+  angle: 105
   targets: []
   targetMask:
     serializedVersion: 2
     m_Bits: 64
   obstructionMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
 --- !u!82 &7537415161221005304
 AudioSource:
   m_ObjectHideFlags: 0
@@ -424,7 +425,7 @@ BoxCollider:
   m_GameObject: {fileID: 3537013880796991955}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -488,6 +489,7 @@ MonoBehaviour:
   onWeaponReload:
     m_PersistentCalls:
       m_Calls: []
+  useCamera: 0
   weaponMan: {fileID: 0}
 --- !u!82 &6836893724133332849
 AudioSource:

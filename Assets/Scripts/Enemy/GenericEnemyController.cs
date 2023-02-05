@@ -18,6 +18,7 @@ public class GenericEnemyController : MonoBehaviour
 
     public float distanceToTarget;
     public float followDistance = 10f;
+    public float fireDistance = 10f;
     public float lookSpeed = 5;
     public float waitTime = 1f;
     public bool aggroed = false;
@@ -47,6 +48,18 @@ public class GenericEnemyController : MonoBehaviour
             {
                 navMeshAgent.SetDestination(Target.transform.position);
                 FaceTarget();
+
+                if(distanceToTarget <= fireDistance)
+                {
+                    FaceTarget();
+                    if (fireWait <= 0)
+                    {
+                        enemyWeapon.Fire();
+                        fireWait = waitTime;
+                    }
+                    fireWait -= Time.deltaTime;
+                }
+                
             }
             else
             {

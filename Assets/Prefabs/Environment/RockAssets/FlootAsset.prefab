@@ -12,12 +12,12 @@ GameObject:
   - component: {fileID: 8552733918817307600}
   - component: {fileID: 6000632324421605887}
   - component: {fileID: 1928981340200334759}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: FlootAsset
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &1928981340200334756
 Transform:

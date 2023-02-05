@@ -29,6 +29,7 @@ public class Weapon : MonoBehaviour
     public string animPullUpName;
     public UnityEvent onWeaponFire;
     public UnityEvent onWeaponReload;
+    public bool useCamera = false;
 
     [HideInInspector]
     public WeaponManager weaponMan;
@@ -78,6 +79,28 @@ public class Weapon : MonoBehaviour
 
     public void Fire()
     {
+        if (useCamera)
+        {
+            Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5F, 0.5F, 0));
+            Vector3 targetPoint;
+            RaycastHit camHit;
+
+            if (Physics.Raycast(ray, out camHit))
+            {
+                targetPoint = camHit.point;
+            }
+            else
+            {
+                targetPoint = ray.GetPoint(1000f);
+            }
+
+
+
+            shootPos.LookAt(targetPoint);
+        }
+        
+
+
         if (fireWait <= fireDelay || reloading) return;
         if (currentAmmo <= 0)
         {

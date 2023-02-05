@@ -258,7 +258,7 @@ MonoBehaviour:
   maxAmmo: 8
   reloadTime: 1
   reloading: 0
-  fireDelay: 0.35
+  fireDelay: 0.2
   shootPos: {fileID: 521218396941757972}
   bulletsPerShot: 0
   bulletSpread: 0
@@ -308,6 +308,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  useCamera: 1
   weaponMan: {fileID: 0}
 --- !u!82 &7833495954975395937
 AudioSource:

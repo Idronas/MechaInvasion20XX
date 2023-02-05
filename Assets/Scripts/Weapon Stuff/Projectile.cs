@@ -53,12 +53,14 @@ public class Projectile : MonoBehaviour
         }
         if (projectileType == ProjectileType.Hitscan)
         {
+           
+
             Vector3[] positions = new Vector3[2];
             positions[0] = transform.position;
             positions[1] = transform.position + transform.forward * 10;
             hitScanLine.SetPositions(positions);
             Destroy(gameObject, .1f);
-            if(Physics.Raycast(transform.position, transform.forward, out RaycastHit hit))
+            if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 1000, ~ignore))
             {
                 Debug.DrawRay(transform.position, transform.forward, Color.red, 3f);
                 hit.transform?.gameObject.GetComponent<EnemyTraits>()?.TakeDamage((int)projectileDamage);
@@ -66,7 +68,6 @@ public class Projectile : MonoBehaviour
                 var c = GameObject.Instantiate(explosionPrefab, hit.point, Quaternion.identity);
                 Destroy(c, .5f);
             }
-           
 
 
         }

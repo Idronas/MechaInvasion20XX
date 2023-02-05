@@ -322,7 +322,7 @@ MonoBehaviour:
     type: 3}
   currentAmmo: 6
   maxAmmo: 6
-  reloadTime: 0
+  reloadTime: 1.25
   reloading: 0
   fireDelay: 0.75
   shootPos: {fileID: 3410268790980533312}
@@ -386,6 +386,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  useCamera: 1
   weaponMan: {fileID: 0}
 --- !u!82 &-2012409443690057261
 AudioSource:

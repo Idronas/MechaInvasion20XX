@@ -12,12 +12,12 @@ GameObject:
   - component: {fileID: 5323485259811714163}
   - component: {fileID: 1489095565290805106}
   - component: {fileID: 3642213513935116543}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: BigRocks04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &8164703755069894086
 Transform:

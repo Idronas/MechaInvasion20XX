@@ -12,12 +12,12 @@ GameObject:
   - component: {fileID: 3827017156163701953}
   - component: {fileID: 2687810660585006133}
   - component: {fileID: 7766913759702277525}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Stalactites04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &139051164529216758
 Transform:

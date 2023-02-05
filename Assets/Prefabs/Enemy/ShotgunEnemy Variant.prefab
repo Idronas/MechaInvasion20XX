@@ -20,7 +20,7 @@ PrefabInstance:
     - target: {fileID: 3537013879010323234, guid: 925c25674f12f8d4e98a3f5fff6c657d,
         type: 3}
       propertyPath: m_Speed
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3537013879010323237, guid: 925c25674f12f8d4e98a3f5fff6c657d,
         type: 3}
@@ -30,7 +30,7 @@ PrefabInstance:
     - target: {fileID: 3537013879010323260, guid: 925c25674f12f8d4e98a3f5fff6c657d,
         type: 3}
       propertyPath: health
-      value: 90
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 3537013879010323262, guid: 925c25674f12f8d4e98a3f5fff6c657d,
         type: 3}
@@ -91,6 +91,11 @@ PrefabInstance:
         type: 3}
       propertyPath: waitTime
       value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 3537013879010323263, guid: 925c25674f12f8d4e98a3f5fff6c657d,
+        type: 3}
+      propertyPath: fireDistance
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3537013879010323263, guid: 925c25674f12f8d4e98a3f5fff6c657d,
         type: 3}
@@ -157,7 +162,7 @@ PrefabInstance:
         type: 3}
       propertyPath: projectilePrefab
       value: 
-      objectReference: {fileID: 8749323252685203630, guid: 509b194a7af55ed408d3765bb2996060,
+      objectReference: {fileID: 8749323252685203630, guid: 18f2eba86697ab749973652e41dedc37,
         type: 3}
     - target: {fileID: 3537013880796993068, guid: 925c25674f12f8d4e98a3f5fff6c657d,
         type: 3}

@@ -175,7 +175,14 @@ public class LocalPlayerControllerState : MonoBehaviour
 		//playerCurrentVelocity.y = Mathf.Clamp(yVelocity.y, playerGravity, 2000f);
 		if (grounded) playerCurrentVelocity.y = Mathf.Max(playerCurrentVelocity.y, 0);
 	}
-
+	void OnControllerColliderHit(ControllerColliderHit c)
+	{
+		if (!grounded)
+		{
+			Debug.Log("wioa");
+			playerCurrentVelocity *= .1f;
+		}
+	}
 	private void GroundMove()
 	{
 		float deltaX;

@@ -102,9 +102,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
-  m_Height: 2
+  m_Height: 2.51
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.41, z: 0}
 --- !u!195 &3537013879010323234
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -359,7 +359,7 @@ Transform:
   m_GameObject: {fileID: 3537013880796991955}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.392, z: 0.656}
-  m_LocalScale: {x: 0.34, y: 0.36, z: 1.14}
+  m_LocalScale: {x: 0.418132, y: 0.442728, z: 1.4019719}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3537013880134787634}
@@ -603,17 +603,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: d352578a29c0cc247a535b750175d939,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.1332682
+      value: 0.16389324
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d352578a29c0cc247a535b750175d939,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.1332682
+      value: 0.16389324
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d352578a29c0cc247a535b750175d939,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.1332682
+      value: 0.16389324
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d352578a29c0cc247a535b750175d939,
         type: 3}

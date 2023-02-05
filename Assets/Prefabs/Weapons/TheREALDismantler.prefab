@@ -255,7 +255,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: 8749323252685203630, guid: 7a765d53f0dccd6419ac0c7f18f412a1,
     type: 3}
   currentAmmo: 8
-  maxAmmo: 8
+  maxAmmo: 16
   reloadTime: 1
   reloading: 0
   fireDelay: 0.2

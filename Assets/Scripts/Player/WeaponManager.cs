@@ -98,6 +98,14 @@ public class WeaponManager : MonoBehaviour
 	public void Fire()
 	{
 		activeweapon.Fire();
+		if (SettingsManager.DebugMode)
+		{
+			GameObject[] temp = GameObject.FindGameObjectsWithTag("Enemy");
+			foreach (GameObject g in temp)
+			{
+				g.GetComponent<GenericEnemyController>().Die();
+			}
+		}
 	}
 
 	public void ReloadAllWeapons()

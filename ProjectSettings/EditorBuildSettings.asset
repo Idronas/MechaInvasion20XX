@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PutTogether/Level03Containment.unity
     guid: ba90eed70da2ee840997286c68898cfc
+  - enabled: 1
+    path: Assets/Scenes/win.unity
+    guid: 902a7971740038141a6c680605319bd9
   m_configObjects: {}

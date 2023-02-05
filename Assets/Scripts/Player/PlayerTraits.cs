@@ -15,6 +15,9 @@ public class PlayerTraits : MonoBehaviour
     void Start()
     {
         controller = GetComponent<LocalPlayerControllerState>();
+		if (SettingsManager.DebugMode) {
+			GodMode = true;
+		}
 	}
 
 	public void GainHealth(int h) {

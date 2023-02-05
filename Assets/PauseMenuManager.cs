@@ -101,4 +101,8 @@ public class PauseMenuManager : MonoBehaviour
 		sfxAudioSource.PlayOneShot(hover);
 	}
 
+	public void NextLevel() {
+		GameManager.NextLevel();
+	}
+
 }

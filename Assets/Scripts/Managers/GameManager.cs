@@ -18,10 +18,15 @@ public static class GameManager
 	public static void ClearEnemiesThisLevel() {
 		
 	}
-	public static void EnemyKilled() {
+	public static void EnemyKilled()
+	{
 		enemiesThisLevel--;
 		Debug.Log(enemiesThisLevel);
-		if (enemiesThisLevel <= 0 ) NextLevel();
+		if (enemiesThisLevel <= 0)
+		{
+			enemiesThisLevel = 0;
+			NextLevel();
+		}
 	}
 	public static void SetEnemiesThisLevel() {
 
@@ -31,7 +36,6 @@ public static class GameManager
 	}
 	public static void RegisterEnemy() {
 		enemiesThisLevel++;
-		Debug.Log(enemiesThisLevel);
 	}
 
 }

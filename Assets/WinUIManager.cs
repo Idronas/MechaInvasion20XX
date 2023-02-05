@@ -9,6 +9,11 @@ public class WinUIManager : MonoBehaviour
 	public AudioMixer audioMixer;
 	public AudioClip hover;
 
+	void Start() {
+		Cursor.lockState = CursorLockMode.None;
+		Cursor.visible = true;
+	}
+
 	public void HoverButton()
 	{
 		sfxAudioSource.PlayOneShot(hover);

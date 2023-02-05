@@ -7,7 +7,8 @@ using TMPro;
 public class HealthUI : MonoBehaviour
 {
     private PlayerTraits traits;
-    public Image fill;
+	public TextMeshProUGUI text;
+	public Image fill;
 
     void Start()
     {
@@ -17,6 +18,7 @@ public class HealthUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        fill.fillAmount = (float)traits.health / 100f;
+		text.text = traits.health + " / " + traits.maxHealth;
+		fill.fillAmount = (float)traits.health / 100f;
     }
 }

@@ -179,7 +179,7 @@ public class LocalPlayerControllerState : MonoBehaviour
 	{
 		if (!grounded)
 		{
-			Debug.Log("wioa");
+
 			playerCurrentVelocity *= .1f;
 		}
 	}

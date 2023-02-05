@@ -20,7 +20,7 @@ public class MainMenuManager : MonoBehaviour
 
 	void Start()
 	{
-		musicAudioSource.PlayOneShot(mainMenuMusic);
+		musicAudioSource?.PlayOneShot(mainMenuMusic);
 
 		canvases = GetComponentsInChildren<Canvas>();
 		foreach (Canvas c in canvases) {
@@ -51,8 +51,8 @@ public class MainMenuManager : MonoBehaviour
 		sfxAudioSource.PlayOneShot(enter);
 	}
 
-	public void ChangeSensitivity(float f) {
-		SettingsManager.lookSensitivity = f;
+	public void ChangeSensitivity(Slider s) {
+		SettingsManager.lookSensitivity = s.value;
 	}
 
 	public void ChangeSFXVolume(Slider s) {

@@ -252,7 +252,7 @@ public class LocalPlayerControllerStateNewOld : MonoBehaviour
    }
    public void Respawn()
    {
-      GameObject spawnPoint = GameObject.Find("RespawnPoint");
+        GameObject spawnPoint = RespawnPoint.Instance.gameObject;
       gameObject.transform.position = spawnPoint.transform.position;
       GetComponent<PlayerTraits>().health = GetComponent<PlayerTraits>().maxHealth;
       GetComponentInChildren<WeaponManager>().ReloadAllWeapons();

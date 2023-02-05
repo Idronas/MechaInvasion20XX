@@ -12,7 +12,7 @@ public class HealthUI : MonoBehaviour
 
     void Start()
     {
-        traits = GameObject.Find("Player")?.GetComponent<PlayerTraits>();
+        traits = LocalPlayerControllerState.Instance.gameObject.GetComponent<PlayerTraits>();
     }
 
     // Update is called once per frame

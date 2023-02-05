@@ -7,6 +7,33 @@ using UnityEngine.InputSystem;
 [System.Serializable]
 public class LocalPlayerControllerState : MonoBehaviour
 {
+	private static LocalPlayerControllerState _instance;
+
+	public static LocalPlayerControllerState Instance
+	{
+		get
+		{
+			if (_instance == null)
+			{
+				_instance = GameObject.FindObjectOfType<LocalPlayerControllerState>();
+			}
+
+			return _instance;
+		}
+	}
+
+	void Awake()
+	{
+		if (_instance != null && _instance != this)
+		{
+			Destroy(this.gameObject);
+		}
+		else
+		{
+			_instance = this;
+		}
+
+	}
 
 	#region Properties
 	public CharacterController playerController;
@@ -22,6 +49,8 @@ public class LocalPlayerControllerState : MonoBehaviour
 	private bool canJump = true;
 	private bool isCrouching = false;
 	private float originalHeight, originalCameraY, originalFOV;
+
+	public GameObject GunHolder;
 
 	private Vector2 moveInput;
 	private Vector2 lookInput;
@@ -435,7 +464,7 @@ public class LocalPlayerControllerState : MonoBehaviour
 	}
 	public void Respawn()
 	{
-		GameObject spawnPoint = GameObject.Find("RespawnPoint");
+		GameObject spawnPoint = RespawnPoint.Instance.gameObject;
 		gameObject.transform.position = spawnPoint.transform.position;
 		GetComponent<PlayerTraits>().health = GetComponent<PlayerTraits>().maxHealth;
 		GetComponentInChildren<WeaponManager>().ReloadAllWeapons();

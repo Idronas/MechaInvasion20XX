@@ -29,7 +29,7 @@ public class GenericEnemyController : MonoBehaviour
 
     void Start()
     {
-        Target = GameObject.Find("Player");
+        Target = LocalPlayerControllerState.Instance.gameObject;
         eyes = GetComponent<FieldOfView>();
 		GameManager.Instance.RegisterEnemy();
     }

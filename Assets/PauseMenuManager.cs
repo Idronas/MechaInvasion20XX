@@ -27,7 +27,7 @@ public class PauseMenuManager : MonoBehaviour
 		{
 			if (c.gameObject.name != "HUD") c.gameObject.SetActive(false);
 		}
-		player = GameObject.Find("Player");
+		player = LocalPlayerControllerState.Instance.gameObject;
 		playerInput = player.GetComponent<PlayerInput>();
 		pause = playerInput.actions["Pause"];
 

@@ -9,7 +9,7 @@ public class AmmoUI : MonoBehaviour
 	private TextMeshProUGUI text;
 	void Start()
 	{
-		weaponManager = GameObject.Find("GunHolder")?.GetComponent<WeaponManager>();
+		weaponManager = LocalPlayerControllerState.Instance.GetComponentInChildren<WeaponManager>();
 		text = GetComponent<TextMeshProUGUI>();
 	}
 

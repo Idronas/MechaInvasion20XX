@@ -27,7 +27,6 @@ public class FieldOfView : MonoBehaviour
 
             if (currentWaitTime >= waitTime)
             {
-                Debug.Log("adding player ;)");
 
                 EnemyTarget targ = new EnemyTarget(GetComponent<GenericEnemyController>().Target);
                 targets.Add(targ);

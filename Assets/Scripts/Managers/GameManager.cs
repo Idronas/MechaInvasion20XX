@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public static class GameManager
 {
-	static List<GameObject> enemiesThisLevel;
+	static int enemiesThisLevel;
 	public static bool isPaused = false;
 
 	public static void ReturnToMainMenu() {
@@ -16,13 +16,22 @@ public static class GameManager
 	}
 	
 	public static void ClearEnemiesThisLevel() {
-		enemiesThisLevel.Clear();
-	}
-	public static void EnemyKiled(GameObject e) {
 		
 	}
-	public static void SetEnemiesThisLevel(List<GameObject> e) {
-		enemiesThisLevel = e;
+	public static void EnemyKilled() {
+		enemiesThisLevel--;
+		Debug.Log(enemiesThisLevel);
+		if (enemiesThisLevel <= 0 ) NextLevel();
+	}
+	public static void SetEnemiesThisLevel() {
+
+	}
+	public static int GetEnemiesThisLevel() {
+		return enemiesThisLevel;
+	}
+	public static void RegisterEnemy() {
+		enemiesThisLevel++;
+		Debug.Log(enemiesThisLevel);
 	}
 
 }

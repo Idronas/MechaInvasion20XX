@@ -15,9 +15,14 @@ public class PlayerTraits : MonoBehaviour
     void Start()
     {
         controller = GetComponent<LocalPlayerControllerState>();
-    }
+	}
 
-    public void TakeDamage(int h)
+	public void GainHealth(int h) {
+		health += h;
+		health = Mathf.Clamp(health, 0, maxHealth);
+	}
+	
+	public void TakeDamage(int h)
     {
         if (GodMode)
         {

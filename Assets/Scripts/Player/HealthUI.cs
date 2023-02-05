@@ -18,6 +18,5 @@ public class HealthUI : MonoBehaviour
     void Update()
     {
         fill.fillAmount = (float)traits.health / 100f;
-
     }
 }

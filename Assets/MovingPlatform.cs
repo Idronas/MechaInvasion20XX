@@ -11,6 +11,8 @@ public class MovingPlatform : MonoBehaviour
 	public float timeInterval;
 	float timePassed;
 	int i = 0;
+	public Vector3 velocity;
+	private Vector3 previous;
 
 	void Start()
 	{
@@ -27,7 +29,10 @@ public class MovingPlatform : MonoBehaviour
 			currentCheckpoint = nextCheckpoint;
 			nextCheckpoint = NextPlatform();
 		}
+		velocity = (transform.position - previous) / Time.deltaTime;
+      	previous = transform.position;
 	}
+
 	Vector3 NextPlatform() {
 		if (i >= positions.Count - 1) {
 			i = 0;

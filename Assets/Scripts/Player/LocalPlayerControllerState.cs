@@ -334,8 +334,14 @@ public class LocalPlayerControllerState : MonoBehaviour
 			grounded = false;
 			canJump = false;
 		}
-		if (Physics.CheckSphere(pos, radius, ~(1 << 11)) ) {
-			Debug.Log("its works");
+		if (Physics.CheckSphere(pos, radius, LayerMask.GetMask("MovingPlatform")))
+		{
+			Collider[] c = Physics.OverlapSphere(pos, radius, LayerMask.GetMask("MovingPlatform"));
+			foreach(Collider a in c) {
+				if (a.gameObject.layer == 11) {
+					playerController.Move(a.gameObject.GetComponent<MovingPlatform>().velocity * Time.fixedDeltaTime);
+				}
+			}
 		}
 	}
 	private void Sprint()

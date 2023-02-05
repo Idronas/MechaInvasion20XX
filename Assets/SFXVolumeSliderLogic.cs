@@ -13,7 +13,7 @@ public class SFXVolumeSliderLogic : MonoBehaviour
 		slider = GetComponentInChildren<Slider>();
 
 
-		slider.value = SettingsManager.SFXVolume;
+		slider.value = SettingsManager.Instance.SFXVolume;
 
 
 	}

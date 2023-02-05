@@ -96,7 +96,7 @@ public class LocalPlayerControllerStateNewOld : MonoBehaviour
    private void MyInput()
    {
 
-      lookSensitivity = SettingsManager.lookSensitivity;
+      lookSensitivity = SettingsManager.Instance.lookSensitivity;
       crouch = playerInput.actions["Crouch"];
       sprint = playerInput.actions["Sprint"];
       move = playerInput.actions["Move"];

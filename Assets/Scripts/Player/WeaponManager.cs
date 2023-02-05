@@ -98,7 +98,7 @@ public class WeaponManager : MonoBehaviour
 	public void Fire()
 	{
 		activeweapon.Fire();
-		if (SettingsManager.DebugMode)
+		if (SettingsManager.Instance.DebugMode)
 		{
 			GameObject[] temp = GameObject.FindGameObjectsWithTag("Enemy");
 			foreach (GameObject g in temp)

@@ -13,7 +13,7 @@ public class MusicVolumeSliderLogic : MonoBehaviour
 		slider = GetComponentInChildren<Slider>();
 
 
-		slider.value = SettingsManager.MusicVolume;
+		slider.value = SettingsManager.Instance.MusicVolume;
 
 
 	}

@@ -12,7 +12,7 @@ public class EnemySpawner : MonoBehaviour
 	{
 		
 		EnemySpawn[] t = GetComponentsInChildren<EnemySpawn>();
-		if (SettingsManager.RandomEnemies == false)
+		if (SettingsManager.Instance.RandomEnemies == false)
 		{
 			foreach (EnemySpawn o in t)
 			{

@@ -13,8 +13,8 @@ public class SensitivitySliderLogic : MonoBehaviour
 		slider = GetComponentInChildren<Slider>();
 		text = GetComponentInChildren<TMP_InputField>();
 
-		slider.value = SettingsManager.lookSensitivity;
-		text.text = SettingsManager.lookSensitivity.ToString();
+		slider.value = SettingsManager.Instance.lookSensitivity;
+		text.text = SettingsManager.Instance.lookSensitivity.ToString();
 
 	}
 

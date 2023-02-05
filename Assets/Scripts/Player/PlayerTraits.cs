@@ -15,7 +15,7 @@ public class PlayerTraits : MonoBehaviour
     void Start()
     {
         controller = GetComponent<LocalPlayerControllerState>();
-		if (SettingsManager.DebugMode) {
+		if (SettingsManager.Instance.DebugMode) {
 			GodMode = true;
 		}
 	}

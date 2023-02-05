@@ -21,7 +21,7 @@ public class PauseMenuManager : MonoBehaviour
 
 	void Start()
 	{
-		GameManager.isPaused = false;
+		GameManager.Instance.isPaused = false;
 		canvases = GetComponentsInChildren<Canvas>();
 		foreach (Canvas c in canvases)
 		{
@@ -37,9 +37,9 @@ public class PauseMenuManager : MonoBehaviour
 	{
 		if (pause.triggered)
 		{
-			if (!GameManager.isPaused) { PauseGame(); return; }
+			if (!GameManager.Instance.isPaused) { PauseGame(); return; }
 
-			if (GameManager.isPaused) { UnPauseGame(); return; }
+			if (GameManager.Instance.isPaused) { UnPauseGame(); return; }
 
 		}
 	}
@@ -59,23 +59,23 @@ public class PauseMenuManager : MonoBehaviour
 
 	public void ChangeSensitivity(Slider s)
 	{
-		SettingsManager.lookSensitivity = s.value;
+		SettingsManager.Instance.lookSensitivity = s.value;
 	}
 
 	public void ChangeSFXVolume(Slider s)
 	{
-		SettingsManager.SFXVolume = s.value;
+		SettingsManager.Instance.SFXVolume = s.value;
 		audioMixer.SetFloat("SFXVolume", Mathf.Log(s.value) * 20);
 	}
 	public void ChangeMusicVolume(Slider s)
 	{
-		SettingsManager.MusicVolume = s.value;
+		SettingsManager.Instance.MusicVolume = s.value;
 		audioMixer.SetFloat("MusicVolume", Mathf.Log(s.value) * 20);
 	}
 
 	public void PauseGame()
 	{
-		GameManager.isPaused = !GameManager.isPaused;
+		GameManager.Instance.isPaused = !GameManager.Instance.isPaused;
 		ChangePanel(Pause);
 		Cursor.visible = true;
 		Cursor.lockState = CursorLockMode.None;
@@ -84,7 +84,7 @@ public class PauseMenuManager : MonoBehaviour
 
 	public void UnPauseGame()
 	{
-		GameManager.isPaused = !GameManager.isPaused;
+		GameManager.Instance.isPaused = !GameManager.Instance.isPaused;
 		ChangePanel(HUD);
 		Cursor.visible = false;
 		Cursor.lockState = CursorLockMode.Locked;
@@ -93,7 +93,7 @@ public class PauseMenuManager : MonoBehaviour
 
 	public void ReturnToMainMenu() {
 		Time.timeScale = 1f;
-		GameManager.ReturnToMainMenu();
+		GameManager.Instance.ReturnToMainMenu();
 	}
 	
 	public void HoverButton()
@@ -102,7 +102,7 @@ public class PauseMenuManager : MonoBehaviour
 	}
 
 	public void NextLevel() {
-		GameManager.NextLevel();
+		GameManager.Instance.NextLevel();
 	}
 
 }

@@ -14,6 +14,6 @@ public class EnemiesTextUI : MonoBehaviour
 
 	void Update()
 	{
-		text.text = "ENEMIES: " + GameManager.GetEnemiesThisLevel();
+		text.text = "ENEMIES: " + GameManager.Instance.GetEnemiesThisLevel();
 	}
 }

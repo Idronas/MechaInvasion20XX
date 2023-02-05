@@ -20,6 +20,6 @@ public class WinUIManager : MonoBehaviour
 	}
 	public void ReturnToMainMenu()
 	{
-		GameManager.ReturnToMainMenu();
+		GameManager.Instance.ReturnToMainMenu();
 	}
 }

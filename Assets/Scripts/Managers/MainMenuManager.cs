@@ -17,8 +17,7 @@ public class MainMenuManager : MonoBehaviour
 	public AudioClip enter;
 	public GameObject egg;
 
-
-	void Start()
+    void Start()
 	{
 		musicAudioSource?.PlayOneShot(mainMenuMusic);
 
@@ -43,7 +42,7 @@ public class MainMenuManager : MonoBehaviour
 	}
 
 	public void PlayGame() {
-		if (SettingsManager.DebugMode) {
+		if (SettingsManager.Instance.DebugMode) {
 			SceneManager.LoadScene(1);
 			return;
 		}
@@ -52,16 +51,16 @@ public class MainMenuManager : MonoBehaviour
 	}
 
 	public void ChangeSensitivity(Slider s) {
-		SettingsManager.lookSensitivity = s.value;
+		SettingsManager.Instance.lookSensitivity = s.value;
 	}
 
 	public void ChangeSFXVolume(Slider s) {
-		SettingsManager.SFXVolume = s.value;
+		SettingsManager.Instance.SFXVolume = s.value;
 		audioMixer.SetFloat("SFXVolume", Mathf.Log(s.value) * 20);
 
 	}
 	public void ChangeMusicVolume(Slider s) {
-		SettingsManager.MusicVolume = s.value;
+		SettingsManager.Instance.MusicVolume = s.value;
 		audioMixer.SetFloat("MusicVolume", Mathf.Log(s.value) * 20);
 	}
 
@@ -71,8 +70,8 @@ public class MainMenuManager : MonoBehaviour
 	}
 
 	public void DebugModeEnable() {
-		SettingsManager.DebugMode = true;
-		Debug.Log(SettingsManager.DebugMode);
+		SettingsManager.Instance.DebugMode = true;
+		Debug.Log(SettingsManager.Instance.DebugMode);
 		egg.SetActive(true);
 
 	}

@@ -31,6 +31,7 @@ public class GenericEnemyController : MonoBehaviour
     {
         Target = GameObject.Find("Player");
         eyes = GetComponent<FieldOfView>();
+		GameManager.RegisterEnemy();
     }
 
     // Update is called once per frame
@@ -99,7 +100,9 @@ public class GenericEnemyController : MonoBehaviour
 
     public void Die()
     {
-        onEnemyDied?.Invoke();
+		Target.GetComponent<PlayerTraits>().GainHealth(10);
+		GameManager.EnemyKilled();
+		onEnemyDied?.Invoke();
         var c = GameObject.Instantiate(gibs, this.transform.position, this.transform.rotation);
         Destroy(c, 10f);
         Destroy(gameObject);

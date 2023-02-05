@@ -29,6 +29,9 @@ public class EnemySpawner : MonoBehaviour
 		foreach (EnemySpawn o in t) {
 			Instantiate(enemies[(int)Random.Range(0, enemies.Count)], o.gameObject.transform.position, o.gameObject.transform.rotation);
 		}
+
+		//GameManager.SetEnemiesThisLevel(enemies);
+
 	}
 
 }

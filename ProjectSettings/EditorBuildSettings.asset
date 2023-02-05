@@ -12,12 +12,12 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 5521953dc03194546bed1052fab8fbb8
   - enabled: 1
-    path: Assets/Scenes/Z scenes/ZSceneArtTest.unity
-    guid: d08bdd276128972478b39cb3e0e9564d
+    path: Assets/Scenes/PutTogether/Level01teleroot.unity
+    guid: c2bc7748d2c492047b375d380164457b
   - enabled: 1
-    path: Assets/Scenes/Z scenes/forest.unity
-    guid: 9076e45b681d6aa458cca668342e36dd
+    path: Assets/Scenes/PutTogether/Level02Forest.unity
+    guid: 1546d8fa7b3d8d3498db3995f130712e
   - enabled: 1
-    path: Assets/Scenes/Z scenes/containment.unity
-    guid: f9a553d742221f64893e61deb9a3e28f
+    path: Assets/Scenes/PutTogether/Level03Containment.unity
+    guid: ba90eed70da2ee840997286c68898cfc
   m_configObjects: {}

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,14 +12,16 @@ public class GenericEnemyController : MonoBehaviour
     public Weapon enemyWeapon;
     public Animator anim;
     public GameObject gibs;
+    public FieldOfView eyes;
+    public Action onEnemyDied;
 
 
     public float distanceToTarget;
     public float followDistance = 10f;
     public float lookSpeed = 5;
     public float waitTime = 1f;
+    public bool aggroed = false;
     private float fireWait = 1f;
-
 
     private float currentSpeed;
     private Vector3 previousPosition;
@@ -26,33 +29,45 @@ public class GenericEnemyController : MonoBehaviour
     void Start()
     {
         Target = GameObject.Find("Player");
+        eyes = GetComponent<FieldOfView>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        distanceToTarget = Mathf.Abs((Target.transform.position - gameObject.transform.position).magnitude);
-        if (distanceToTarget > followDistance)
+        if(eyes.CanSeePlayer() && !aggroed)
         {
-            navMeshAgent.SetDestination(Target.transform.position);
+            aggroed = true;
         }
-        else
+
+        if (aggroed)
         {
-            navMeshAgent.SetDestination(gameObject.transform.position);
-            FaceTarget();
-            if (fireWait <= 0)
+            distanceToTarget = Mathf.Abs((Target.transform.position - gameObject.transform.position).magnitude);
+            if (distanceToTarget > followDistance)
             {
-                enemyWeapon.Fire();
-                fireWait = waitTime;
+                navMeshAgent.SetDestination(Target.transform.position);
             }
-            fireWait -= Time.deltaTime;
+            else
+            {
+
+                navMeshAgent.SetDestination(gameObject.transform.position);
+                FaceTarget();
+                if (fireWait <= 0)
+                {
+                    enemyWeapon.Fire();
+                    fireWait = waitTime;
+                }
+                fireWait -= Time.deltaTime;
+
+            }
+
+            Vector3 curMove = transform.position - previousPosition;
+            currentSpeed = curMove.magnitude / Time.deltaTime;
+            previousPosition = transform.position;
+
+            anim.SetFloat("Speed", currentSpeed);
         }
-
-        Vector3 curMove = transform.position - previousPosition;
-        currentSpeed = curMove.magnitude / Time.deltaTime;
-        previousPosition = transform.position;
-
-        anim.SetFloat("Speed", currentSpeed);
+        
     }
     private void FaceTarget()
     {
@@ -64,6 +79,7 @@ public class GenericEnemyController : MonoBehaviour
 
     public void Die()
     {
+        onEnemyDied?.Invoke();
         var c = GameObject.Instantiate(gibs, this.transform.position, this.transform.rotation);
         Destroy(c, 10f);
         Destroy(gameObject);

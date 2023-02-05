@@ -1,21 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class HealthUI : MonoBehaviour
 {
-   private PlayerTraits traits;
-   private TextMeshProUGUI text;
-   void Start()
-   {
-      traits = GameObject.Find("Player")?.GetComponent<PlayerTraits>();
-      text = GetComponent<TextMeshProUGUI>();
-   }	
+    private PlayerTraits traits;
+    public Image fill;
 
-   // Update is called once per frame
-   void Update()
-   {
-      text.text = traits.health.ToString();
-   }
+    void Start()
+    {
+        traits = GameObject.Find("Player")?.GetComponent<PlayerTraits>();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        fill.fillAmount = (float)traits.health / 100f;
+
+    }
 }

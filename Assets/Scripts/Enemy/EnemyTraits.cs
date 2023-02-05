@@ -24,6 +24,7 @@ public class EnemyTraits : MonoBehaviour
     {
         health -= amount;
         if (health <= 0) controller.Die();
+        controller.aggroed = true;
 
         onTakeDamage?.Invoke();
     }

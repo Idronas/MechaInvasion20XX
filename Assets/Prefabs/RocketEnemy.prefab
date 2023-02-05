@@ -188,6 +188,7 @@ GameObject:
   - component: {fileID: 8440557830333203725}
   - component: {fileID: 8440557830333203728}
   - component: {fileID: 8440557830333203731}
+  - component: {fileID: 3910140801273585573}
   m_Layer: 8
   m_Name: RocketEnemy
   m_TagString: Untagged
@@ -316,10 +317,12 @@ MonoBehaviour:
   enemyWeapon: {fileID: 8440557828563384323}
   anim: {fileID: 5552762185766746203}
   gibs: {fileID: 4024347683856632289, guid: c4ca1da0245ce0b4e9c03615f96fb971, type: 3}
+  eyes: {fileID: 0}
   distanceToTarget: 0
   followDistance: 10
   lookSpeed: 5
   waitTime: 1
+  aggroed: 0
 --- !u!114 &8440557830333203731
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -348,6 +351,27 @@ MonoBehaviour:
           m_StringArgument: Hit
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &3910140801273585573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8440557830333203722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 739fd32f0dfbd834ebbb5583b4802dfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 25.73
+  angle: 108
+  targets: []
+  targetMask:
+    serializedVersion: 2
+    m_Bits: 64
+  obstructionMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1001 &740452062893742712
 PrefabInstance:
   m_ObjectHideFlags: 0

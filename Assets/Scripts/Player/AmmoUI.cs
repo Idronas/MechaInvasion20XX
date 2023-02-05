@@ -19,6 +19,7 @@ public class AmmoUI : MonoBehaviour
          text.text = "Reloading";
          return;
       }
+
 		text.text = "AMMO: " + weaponManager.activeweapon.currentAmmo.ToString() + " / " + weaponManager.activeweapon.maxAmmo.ToString();
    }
 }

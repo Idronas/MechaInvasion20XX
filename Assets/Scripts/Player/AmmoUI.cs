@@ -20,6 +20,6 @@ public class AmmoUI : MonoBehaviour
          return;
       }
 
-		text.text = "AMMO: " + weaponManager.activeweapon.currentAmmo.ToString() + " / " + weaponManager.activeweapon.maxAmmo.ToString();
+	    text.text = "AMMO: " + weaponManager.activeweapon.currentAmmo.ToString() + " / " + weaponManager.activeweapon.maxAmmo.ToString();
    }
 }

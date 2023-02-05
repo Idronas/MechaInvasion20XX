@@ -46,6 +46,7 @@ public class GenericEnemyController : MonoBehaviour
             if (distanceToTarget > followDistance)
             {
                 navMeshAgent.SetDestination(Target.transform.position);
+                FaceTarget();
             }
             else
             {
@@ -71,10 +72,16 @@ public class GenericEnemyController : MonoBehaviour
     }
     private void FaceTarget()
     {
-        Vector3 lookPos = Target.transform.position - weapon.transform.position;
+        //Vector3 lookPos = Target.transform.position - weapon.transform.position;
         //lookPos.y = 0;
-        Quaternion rotation = Quaternion.LookRotation(lookPos);
-        weapon.transform.rotation = Quaternion.Slerp(weapon.transform.rotation, rotation, lookSpeed);
+        //Quaternion rotation = Quaternion.LookRotation(lookPos);
+        //weapon.transform.rotation = Quaternion.Slerp(weapon.transform.rotation, rotation, lookSpeed);
+        //this.transform.LookAt(Target.transform.position);
+
+        var lookPos = Target.transform.position - transform.position;
+        lookPos.y = 0;
+        var rotation = Quaternion.LookRotation(lookPos);
+        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * lookSpeed);
     }
 
     public void Die()

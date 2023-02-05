@@ -25,8 +25,10 @@ public class Weapon : MonoBehaviour
     public int bulletsPerShot = 5;
     public float bulletSpread = 2.0f;
     public Action onWeaponSelect;
+    public UnityEvent weaponSelectEvent;
     public string animPullUpName;
     public UnityEvent onWeaponFire;
+    public UnityEvent onWeaponReload;
 
     [HideInInspector]
     public WeaponManager weaponMan;
@@ -105,6 +107,7 @@ public class Weapon : MonoBehaviour
 
     public void WeaponSelected()
     {
+        weaponSelectEvent?.Invoke();
         weaponMan.anim.Play(animPullUpName);
     }
 
@@ -113,6 +116,7 @@ public class Weapon : MonoBehaviour
         reloading = true;
         reloadWait = reloadTime;
         weaponMan?.anim?.SetTrigger("Reload");
+        onWeaponReload?.Invoke();
     }
 
     public void ReloadInstant()
